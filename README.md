@@ -1,0 +1,2 @@
+# ttylock
+Lock your ttys
