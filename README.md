@@ -16,3 +16,5 @@ cargo install ttylock
 ```sh
 ttylock
 ```
+
+## Note: Only for Linux
