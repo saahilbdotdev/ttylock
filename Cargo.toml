@@ -4,6 +4,9 @@ version = "0.1.0"
 edition = "2021"
 license = "MIT"
 description = "Lock your TTYs with this simple and fast TTY lock screen"
+homepage = "https://github.com/saahilbdotdev/ttylock"
+repository = "https://github.com/saahilbdotdev/ttylock"
+readme = "README.md"
 
 [dependencies]
 pam = "0.8.0"
