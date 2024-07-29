@@ -2,6 +2,8 @@
 name = "ttylock"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+description = "Lock your TTYs with this simple and fast TTY lock screen"
 
 [dependencies]
 pam = "0.8.0"
@@ -13,3 +15,9 @@ opt-level = 0
 
 [profile.release]
 opt-level = 3
+
+[[bin]]
+name = "ttylock"
+path = "src/main.rs"
+test = false
+doctest = false
