@@ -1,15 +1,11 @@
-# TTYLock
+# TTYLock (v0.1.0)
 Lock your TTYs with this simple and fast TTY lock screen
 
 ## Installation
 
-### Cargo:
-
 ```sh
-cargo install ttylock
+curl -sL https://github.com/saahilbdotdev/ttylock/releases/latest/download/install.sh | bash
 ```
-
-#### Note: Make sure to add `~/.cargo/bin` to your PATH if you haven't already.
 
 ## Usage
 
