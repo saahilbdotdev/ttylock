@@ -1,0 +1,50 @@
+name: Build Rust Binary
+
+on:
+  push:
+    tags:
+      - "*"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build
+        run: cargo build --release --verbose
+
+      - name: Prepare install.sh
+        run: |
+          echo "#!/bin/bash" > install.sh
+          echo "echo 'Downloading ttylock...'" >> install.sh
+          echo "curl -LO https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/ttylock" >> install.sh
+          echo "echo 'Installing ttylock...'" >> install.sh
+          echo "chmod +x ttylock" >> install.sh
+          echo "sudo mv ttylock /usr/local/bin/ttylock" >> install.sh
+          echo "echo 'Downloading ttylock pam config...'" >> install.sh
+          echo "curl -LO https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}/ttylock_pam" >> install.sh
+          echo "echo 'Installing ttylock pam config...'" >> install.sh
+          echo "sudo mv ttylock_pam /etc/pam.d/ttylock" >> install.sh
+          echo "echo 'ttylock installed successfully!'" >> install.sh
+          cp pam/ttylock ttylock_pam
+        shell: bash
+
+      - name: Upload binary and script to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            target/release/ttylock
+            install.sh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
