@@ -23,7 +23,7 @@ jobs:
 
       - name: Build
         run: |
-          sudo apt install llvm llvm-dev libpam0g-dev clang
+          sudo apt install llvm llvm-dev libpam0g-dev clang libclang-dev
           cargo build --release --verbose
 
       - name: Prepare install.sh
