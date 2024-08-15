@@ -22,7 +22,9 @@ jobs:
           override: true
 
       - name: Build
-        run: cargo build --release --verbose
+        run: |
+          sudo apt install llvm llvm-dev libpam0g-dev clang libclang-dev
+          cargo build --release --verbose
 
       - name: Prepare install.sh
         run: |
@@ -46,5 +48,6 @@ jobs:
           files: |
             target/release/ttylock
             install.sh
+            ttylock_pam
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PUBLISHER_TOKEN }}
